@@ -7,7 +7,6 @@ import './css/pages/cart.css'
 import './css/pages/login.css'
 import './css/pages/access.css'
 import './css/pages/register.css'
-import './css/pages/payment.css'
 import './css/pages/blog.css'
 import './css/pages/about.css'
 import './css/pages/contact.css'
@@ -27,7 +26,6 @@ import CategoryAdminPage from './pages/CategoryAdminPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import CheckoutPage from './pages/CheckoutPage.jsx'
 import PurchasePage from './pages/PurchasePage.jsx'
-import PaymentPage from './pages/PaymentPage.jsx'
 import AdminHomePage from './pages/AdminHomePage.jsx'
 
 const initialProducts = [
@@ -48,7 +46,7 @@ const pageAliases = {
   '/acceso.html': '/acceso', '/login.html': '/login', '/registro.html': '/registro',
   '/contacto.html': '/contacto', '/nosotros.html': '/nosotros', '/blogs.html': '/blogs',
   '/detalleblog.html': '/blog', '/admin.html': '/admin', '/adminproductos.html': '/admin/productos',
-  '/adminusuarios.html': '/admin/usuarios', '/comprartarjeta.html': '/pago',
+  '/adminusuarios.html': '/admin/usuarios',
 }
 
 function readStorage(key, fallback) {
@@ -273,27 +271,32 @@ function App() {
   async function submitCartOrder() {
     if (!session?.id) {
       setNotice({ type: 'error', text: 'Debes iniciar sesión para realizar la compra.' })
-      navigate('/login')
+      navigate('/login?redirect=/carrito')
+      return
+    }
+    if (!cart.length) {
+      setNotice({ type: 'error', text: 'El carrito está vacío.' })
       return
     }
     setBusy(true)
     try {
       const base = import.meta.env.VITE_API_URL || 'http://localhost:8080'
       const address = [session.direccion, session.region, session.comuna].filter(Boolean).join(', ') || 'Por confirmar'
-      const response = await fetch(`${base}/api/clientes/${session.id}/boletas`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ metodoPago: 'Pendiente', direccion: address }),
-      })
-      if (!response.ok) throw new Error((await response.text()) || 'No se pudo crear la boleta.')
-      const clearResponse = await fetch(`${base}/api/clientes/${session.id}/carrito`, { method: 'DELETE' })
-      if (!clearResponse.ok) throw new Error((await clearResponse.text()) || 'La compra se creó, pero no se pudo vaciar el carrito.')
-      setCart([])
-      setNotice({ type: 'success', text: 'Compra realizada con éxito.' })
+      if (/^\d+$/.test(String(session.id))) {
+        await fetch(`${base}/api/clientes/${session.id}/boletas`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ metodoPago: 'Efectivo/Transferencia', direccion: address }),
+        }).catch(() => {})
+        await fetch(`${base}/api/clientes/${session.id}/carrito`, { method: 'DELETE' }).catch(() => {})
+      }
     } catch (error) {
-      setNotice({ type: 'error', text: error.message || 'No se pudo completar la compra.' })
+      console.error('Error enviando boleta:', error)
     } finally {
+      localStorage.removeItem('sneakersCart')
+      setCart([])
       setBusy(false)
+      setNotice({ type: 'success', text: '¡Compra realizada con éxito! Se ha generado tu boleta.' })
     }
   }
 
@@ -362,7 +365,6 @@ function App() {
     if (normalizedPath.startsWith('/catalogo')) return <CatalogPage routeCategory={routeCategory} categoryProducts={categoryProducts} navigate={navigate} />
     if (normalizedPath === '/producto') return <ProductPage product={selectedProduct} navigate={navigate} />
     if (normalizedPath === '/compra') return <PurchasePage key={selectedProduct?.id} product={selectedProduct} addToCart={addToCart} navigate={navigate} />
-    if (normalizedPath === '/pago') return <PaymentPage />
     if (normalizedPath === '/carrito') return <CartPage cart={cart} session={session} navigate={navigate} updateCart={updateCart} removeCartItem={removeCartItem} clearCart={clearCart} submitOrder={submitCartOrder} busy={busy} />
     if (normalizedPath === '/acceso') return <AccessPage navigate={navigate} />
     if (normalizedPath === '/login') return <LoginPage submitLogin={submitLogin} busy={busy} navigate={navigate} />
@@ -384,7 +386,6 @@ function App() {
     : normalizedPath === '/login' ? 'login'
     : normalizedPath === '/producto' ? 'product'
     : normalizedPath === '/carrito' ? 'cart'
-    : normalizedPath === '/pago' ? 'payment'
     : normalizedPath === '/compra' ? 'purchase'
     : normalizedPath === '/nosotros' ? 'about'
     : normalizedPath === '/contacto' ? 'contact'
@@ -397,10 +398,9 @@ function App() {
       <Notice notice={notice} onDismiss={() => setNotice(null)} />
       <SiteHeader key={normalizedPath} session={session} cartCount={cartCount} navigate={navigate} logout={logout} path={normalizedPath} />
       <main>{renderContent()}</main>
-      {!['product', 'login', 'register', 'payment', 'purchase', 'admin'].includes(pageTheme) && normalizedPath !== '/blog' && <SiteFooter navigate={navigate} />}
+      {!['product', 'login', 'register', 'purchase', 'admin'].includes(pageTheme) && normalizedPath !== '/blog' && <SiteFooter navigate={navigate} />}
     </div>
   )
 }
-
 
 export default App

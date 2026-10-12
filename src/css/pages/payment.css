@@ -1,243 +1,282 @@
-/*
-  comprar.css
-  Estilo del checkout y del formulario de pago.
-  Define la apariencia de la tarjeta de crédito, inputs y layout de compra.
-*/
-.legacy-page-payment * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.legacy-payment-screen {
+  min-height: 100vh !important;
+  background-color: #0b0d17 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 40px 15px !important;
+  box-sizing: border-box !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  color: #ffffff !important;
 }
 
-.legacy-page-payment {
-    background-color: #0b101e;
-    /* Patrón de cuadrícula como en la imagen */
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 30px 30px;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+.legacy-payment-card-wrapper {
+  width: 100% !important;
+  max-width: 380px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 
-.legacy-page-payment .checkout-wrapper {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* TARJETA CRÉDITO VISUAL PÚRPURA */
+.legacy-credit-card {
+  width: 330px !important;
+  height: 195px !important;
+  background: linear-gradient(135deg, #2b0b57 0%, #631b81 60%, #c8236d 100%) !important;
+  border-radius: 16px !important;
+  padding: 20px 22px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7) !important;
+  z-index: 10 !important;
+  margin-bottom: -35px !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-/* ==========================================
-   TÍTULOS
-   ========================================== */
-.legacy-page-payment .header-titles {
-    text-align: center;
-    margin-bottom: 30px;
+.legacy-card-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
-.legacy-page-payment .header-titles h1 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
+.legacy-card-chip {
+  width: 42px !important;
+  height: 30px !important;
+  background: linear-gradient(135deg, #fce08f, #dfa128) !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4) !important;
 }
 
-.legacy-page-payment .header-titles p {
-    color: #00d2ff;
-    font-size: 0.85rem;
-    font-weight: 600;
+.legacy-card-brand {
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  letter-spacing: 1.5px !important;
+  color: #ffffff !important;
 }
 
-/* ==========================================
-   TARJETA 3D
-   ========================================== */
-.legacy-page-payment .card-container {
-    width: 100%;
-    max-width: 340px;
-    height: 215px;
-    perspective: 1000px; /* Necesario para el efecto 3D */
-    margin-bottom: 25px;
-    z-index: 2;
+.legacy-card-number {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  color: #ffffff !important;
+  margin: 10px 0 5px 0 !important;
+  white-space: nowrap !important;
 }
 
-.legacy-page-payment .card-inner {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform-style: preserve-3d;
+.legacy-card-bottom {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  width: 100% !important;
 }
 
-.legacy-page-payment .card-front, .legacy-page-payment .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden; /* Oculta la cara que no está mirando al frente */
-    border-radius: 15px;
-    background: linear-gradient(135deg, #7b2cbf 0%, #3a0ca3 50%, #4361ee 100%);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+.legacy-card-info {
+  display: flex !important;
+  flex-direction: column !important;
+  max-width: 180px !important;
 }
 
-/* FRONTAL */
-.legacy-page-payment .card-logo {
-    text-align: right;
-    font-size: 1.5rem;
-    font-weight: 900;
-    font-style: italic;
-    color: #ffffff;
-    opacity: 0.9;
+.legacy-card-info.legacy-text-right {
+  text-align: right !important;
+  align-items: flex-end !important;
 }
 
-.legacy-page-payment .chip-icon {
-    width: 40px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    opacity: 0.8;
+.legacy-card-label {
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.6px !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  text-transform: uppercase !important;
+  margin-bottom: 2px !important;
 }
 
-.legacy-page-payment .card-number {
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+.legacy-card-val {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-.legacy-page-payment .card-details {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
+/* CAJA DEL FORMULARIO */
+.legacy-payment-form {
+  width: 100% !important;
+  background-color: #141724 !important;
+  border: 1px solid #23283b !important;
+  border-radius: 20px !important;
+  padding: 55px 22px 25px 22px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+  z-index: 1 !important;
 }
 
-.legacy-page-payment .card-details div {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin-top: 3px;
+.legacy-payment-total {
+  text-align: center !important;
+  color: #94a3b8 !important;
+  font-size: 14px !important;
+  margin-bottom: 18px !important;
 }
 
-/* TRASERA */
-.legacy-page-payment .card-back {
-    transform: rotateY(180deg);
-    padding: 0;
+.legacy-payment-total span {
+  color: #e91e63 !important;
+  font-weight: bold !important;
+  font-size: 17px !important;
 }
 
-.legacy-page-payment .magnetic-stripe {
-    width: 100%;
-    height: 45px;
-    background-color: #000000;
-    margin-top: 25px;
+.legacy-field-group {
+  margin-bottom: 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-.legacy-page-payment .signature-area {
-    padding: 0 20px;
-    margin-top: 15px;
+.legacy-field-group label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #94a3b8 !important;
+  margin-bottom: 4px !important;
+  text-transform: uppercase !important;
 }
 
-.legacy-page-payment .signature-area span {
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.8);
-    display: block;
-    margin-bottom: 3px;
+.legacy-payment-form input,
+.legacy-payment-form select {
+  width: 100% !important;
+  background-color: #1e2336 !important;
+  border: 1px solid #2e354f !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+  font-size: 14px !important;
+  outline: none !important;
+  box-sizing: border-box !important;
 }
 
-.legacy-page-payment .signature-box {
-    background-color: #ffffff;
-    height: 35px;
-    width: 100%;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 15px;
+.legacy-payment-form input:focus,
+.legacy-payment-form select:focus {
+  border-color: #e91e63 !important;
 }
 
-.legacy-page-payment #card-cvv-display {
-    color: #000;
-    font-weight: bold;
-    font-style: italic;
-    font-size: 1.1rem;
+.legacy-row-grid {
+  display: flex !important;
+  gap: 10px !important;
+  margin-bottom: 18px !important;
 }
 
-.legacy-page-payment .cvv-info {
-    font-size: 0.6rem;
-    padding: 0 20px;
-    margin-top: 10px;
-    color: rgba(255,255,255,0.6);
+.legacy-row-grid .legacy-field-group {
+  flex: 1 !important;
+  min-width: 0 !important;
 }
 
-/* ==========================================
-   FORMULARIO
-   ========================================== */
-.legacy-page-payment .payment-form {
-    background-color: #1a1f2e;
-    width: 100%;
-    padding: 25px 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.05);
+/* BOTONES */
+.legacy-btn-submit {
+  width: 100% !important;
+  background: linear-gradient(90deg, #8b28ab, #e91e63) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 14px 0 !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.35) !important;
+  margin-top: 5px !important;
 }
 
-.legacy-page-payment .input-group {
-    margin-bottom: 15px;
+.legacy-btn-submit:hover {
+  opacity: 0.95 !important;
 }
 
-.legacy-page-payment .input-group input, .legacy-page-payment .input-group select {
-    width: 100%;
-    background-color: #0f1423;
-    border: 1px solid #2a3143;
-    color: #ffffff;
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.3s;
+.legacy-btn-cancel {
+  width: 100% !important;
+  background-color: transparent !important;
+  color: #64748b !important;
+  border: none !important;
+  padding: 10px 0 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  margin-top: 8px !important;
 }
 
-.legacy-page-payment .input-group input:focus, .legacy-page-payment .input-group select:focus {
-    border-color: #4361ee;
+.legacy-btn-cancel:hover {
+  color: #ffffff !important;
 }
 
-.legacy-page-payment .row-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+/* MODAL DE CONFIRMACIÓN DE BOLETA */
+.legacy-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 9999 !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
 }
 
-.legacy-page-payment .select-group {
-    flex: 1;
+.legacy-modal-content {
+  background-color: #141724 !important;
+  border: 2px solid #e91e63 !important;
+  border-radius: 18px !important;
+  padding: 28px 22px !important;
+  max-width: 380px !important;
+  width: 100% !important;
+  text-align: center !important;
+  box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3) !important;
 }
 
-.legacy-page-payment .cvv-group {
-    flex: 1.2;
+.legacy-modal-content h3 {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  margin-bottom: 12px !important;
 }
 
-.legacy-page-payment .btn-submit {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(90deg, #9d4edd 0%, #ff006e 100%);
-    border: none;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+.legacy-modal-content p {
+  color: #cbd5e1 !important;
+  font-size: 14px !important;
+  margin-bottom: 22px !important;
+  line-height: 1.4 !important;
 }
 
-.legacy-page-payment .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 0, 110, 0.5);
+.legacy-modal-buttons {
+  display: flex !important;
+  gap: 10px !important;
+}
+
+.legacy-btn-accept {
+  flex: 1 !important;
+  background: linear-gradient(90deg, #8b28ab, #e91e63) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 12px 0 !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+.legacy-btn-back {
+  flex: 1 !important;
+  background-color: #2b3248 !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 12px 0 !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+.legacy-loading-text {
+  color: #e91e63 !important;
+  font-weight: bold !important;
+  padding: 10px 0 !important;
 }

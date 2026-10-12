@@ -1,7 +1,6 @@
 /*
-  registro.css
+  register.css
   Estilo del formulario de registro.
-  Define fondo, tarjeta, campos, selectores de región/comuna y botón de envío.
 */
 .legacy-page-register * {
     box-sizing: border-box;
@@ -10,14 +9,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* FONDO DIVIDIDO: ROJO ARRIBA (50%) Y NEGRO ABAJO (50%) */
+/* FONDO DIVIDIDO: ROJO ARRIBA Y NEGRO ABAJO */
 .legacy-page-register {
     background: linear-gradient(to bottom, #FF0033 0%, #FF0033 50%, #000000 50%, #000000 100%);
     background-attachment: fixed;
     min-height: 100vh;
 }
 
-/* CENTRADO ABSOLUTO DE LA TARJETA EN LA PANTALLA */
+/* CENTRADO DE LA TARJETA */
 .legacy-page-register .main-wrapper {
     min-height: 100vh;
     display: flex;
@@ -129,45 +128,77 @@
     margin-left: 8px;
 }
 
-/* LISTA CON ALTURA LIMITADA Y BARRA DE DESPLAZAMIENTO */
+/* LISTA DE OPCIONES (DESPLEGABLE PERSONALIZADO) */
 .legacy-page-register .custom-options-menu {
     display: none;
     position: absolute;
     top: 105%;
     left: 0;
-    width: 100%;
-    background-color: #141414;
-    border: 2px solid #FF0033;
-    border-radius: 8px;
-    max-height: 170px; /* Limita la altura de las opciones */
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
+    width: 100% !important;
+    background-color: #141414 !important;
+    border: 2px solid #FF0033 !important;
+    border-radius: 8px !important;
+    max-height: 200px !important;
+    overflow-y: auto !important;
+    z-index: 1000 !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9) !important;
 }
 
 .legacy-page-register .custom-options-menu.show {
-    display: block;
+    display: block !important;
 }
 
 .legacy-page-register .custom-option {
-    padding: 10px 14px;
-    color: #ffffff;
-    font-size: 0.85rem;
-    cursor: pointer;
-    border-bottom: 1px solid #222222;
-    transition: background-color 0.2s;
+    display: block !important;
+    width: 100% !important;
+    float: none !important;
+    clear: both !important;
+    box-sizing: border-box !important;
+    background-color: #141414 !important;
+    color: #ffffff !important;
+    padding: 10px 14px !important;
+    font-size: 0.85rem !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    border-bottom: 1px solid #222222 !important;
+    transition: background-color 0.2s ease !important;
 }
 
 .legacy-page-register .custom-option:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
 }
 
 .legacy-page-register .custom-option:hover {
-    background-color: #FF0033;
-    color: #ffffff;
+    background-color: #FF0033 !important;
+    color: #ffffff !important;
 }
 
-/* ESTILO DE LA BARRA DE DESPLAZAMIENTO (SCROLLBAR) */
+/* DESPLEGABLES SELECT Y OPTION NATIVOS */
+.legacy-page-register select {
+    width: 100% !important;
+    background-color: #FF0033 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 14px !important;
+    font-weight: bold !important;
+    font-size: 0.85rem !important;
+    cursor: pointer !important;
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+}
+
+.legacy-page-register select option {
+    background-color: #141414 !important;
+    color: #ffffff !important;
+    padding: 10px 14px !important;
+    font-size: 0.85rem !important;
+    display: block !important;
+    float: none !important;
+    width: 100% !important;
+}
+
+/* BARRA DE DESPLAZAMIENTO (SCROLLBAR) */
 .legacy-page-register .custom-options-menu::-webkit-scrollbar {
     width: 6px;
 }
@@ -185,7 +216,7 @@
     background: #cc0029;
 }
 
-/* BOTÓN REGISTRAR ROJO */
+/* BOTÓN REGISTRAR */
 .legacy-page-register .btn-red-submit {
     width: 100%;
     background-color: #FF0033;
@@ -206,21 +237,13 @@
     transform: translateY(-2px);
 }
 
-/* RESPONSIVO PARA MÓVILES */
 @media (max-width: 576px) {
     .legacy-page-register .row-selects {
         flex-direction: column;
     }
 }
 
-
-
-
-
-/* elegir entre iniciar sesion o registrar usuario*/
-/* ===================================================
-   ESTILOS ADICIONALES PARA PANTALLA DE ACCESO DIVIDIDA
-   =================================================== */
+/* ESTILOS DE PANTALLA DIVIDIDA */
 .legacy-page-register .split-container {
     display: flex;
     min-height: 100vh;
@@ -303,22 +326,11 @@
     .legacy-page-register .split-container {
         flex-direction: column;
     }
-    
     .legacy-page-register .left-side {
         border-right: none;
         border-bottom: 2px solid #222222;
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 /* BOTÓN VOLVER ATRÁS */
 .legacy-page-register .btn-back {

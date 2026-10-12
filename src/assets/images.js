@@ -34,6 +34,16 @@ import sportE3 from './images/imgsp/e3.png'
 import sportG1 from './images/imgsp/g1.png'
 import sportG2 from './images/imgsp/g2.png'
 import sportG3 from './images/imgsp/g3.png'
+import sportM12 from './images/imgsp/m12.png'
+
+// --- IMPORTACIONES DE PRODUCTOS DE LA BASE DE DATOS ---
+import urbanA1 from './images/urban/a1 (3).png'
+import urbanE1 from './images/urban/e1.png'
+import sportM2 from './images/imgsp/m2.png'
+import sportM31 from './images/imgsp/m31.png'
+import sportTi from './images/imgsp/ti.png'
+import sportF1 from './images/imgsp/f1 (1).png'
+import sportH1 from './images/imgsp/h1.png'
 
 const images = {
   'urban/90.png': airMax,
@@ -72,6 +82,16 @@ const images = {
   'imgsp/g1.png': sportG1,
   'imgsp/g2.png': sportG2,
   'imgsp/g3.png': sportG3,
+  'imgsp/m12.png': sportM12,
+
+  // --- MAPEOS DE PRODUCTOS DE LA BASE DE DATOS ---
+  'urban/a1 (3).png': urbanA1,
+  'urban/e1.png': urbanE1,
+  'imgsp/m2.png': sportM2,
+  'imgsp/m31.png': sportM31,
+  'imgsp/ti.png': sportTi,
+  'imgsp/f1 (1).png': sportF1,
+  'imgsp/h1.png': sportH1,
 }
 
 export function getImage(path) {
